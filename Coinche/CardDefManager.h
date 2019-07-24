@@ -1,0 +1,58 @@
+#ifndef H__CARDDEFMANAGER_090120152149__H
+#define H__CARDDEFMANAGER_090120152149__H
+
+#include "ResourcesManager.h"
+#include "CardDef.h"
+
+class CardDefManager: public ResourcesManager<CardDef, int, CardDefManager>
+{
+public:
+	CardDefManager(void);
+	~CardDefManager(void);
+
+public:
+	///////////////////////////////////////////////////////////////////////////
+	/// Frees all current used resources if they are ONLY used by the Manager.
+	///////////////////////////////////////////////////////////////////////////
+	void freeResources();
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Frees the desired resources if it is ONLY used by the Manager (not used
+	/// in the game for example).
+	///
+	/// \param id Identifier of the desired resource.
+	///////////////////////////////////////////////////////////////////////////
+	void freeResource(int id);
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Preloads the resource map.
+	///
+	/// \param fileName path to the file enabling to load the map.
+	///////////////////////////////////////////////////////////////////////////
+	void preload(const std::string& fileName);
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Returns the fake card definition.
+	///
+	/// \return A pointer to the fake card def resource.
+	///////////////////////////////////////////////////////////////////////////
+	//PtrResource getFakeCardDef();
+
+	int getFakeCardTypeId() const {return myFakeCardId;}
+
+protected:
+	///////////////////////////////////////////////////////////////////////////
+	/// Loads the desired resource.
+	///
+	/// \param id Identifer of the desired resource.
+	///
+	/// \return A pointer to the resource.
+	///////////////////////////////////////////////////////////////////////////
+	PtrResource loadResource(int id);
+
+protected:
+	//PtrResource myFakeCardDef;
+	int myFakeCardId;
+};
+
+#endif

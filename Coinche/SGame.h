@@ -1,0 +1,48 @@
+#pragma once
+#include "GameState.h"
+#include "Player.h"
+#include "Card.h"
+#include "Timer.h"
+
+class SGame :
+	public GameState
+{
+public:
+	SGame(void);
+	~SGame(void);
+
+	//void draw();
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Pauses the game state.
+	///////////////////////////////////////////////////////////////////////////
+	virtual void pause() {}
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Resumes the game state.
+	///////////////////////////////////////////////////////////////////////////
+	virtual void resume() {}
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Updates the game state.
+	///////////////////////////////////////////////////////////////////////////
+	virtual void update();
+
+	void init();
+	
+	bool catchEvent(const sf::Event& ev);
+
+	virtual void processMessage(const Message& msg);
+
+protected:
+	//Server only function
+	void endTrick();
+	std::vector<TimerFunction> myTimerFunctions;
+
+protected:
+	bool myIsTransition;
+	//Player* myStarter;
+	//std::vector<Player*> myPlayers;
+	//std::vector<Card> myCards;
+};
+
